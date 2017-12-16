@@ -1,0 +1,8 @@
+ifconfig --- Netzwerk Konfig
+su --- Switch user
+passwd --- Set new password
+
+
+mysql -upi -p --- User PI
+mysql -uroot -p --- User Root
+
