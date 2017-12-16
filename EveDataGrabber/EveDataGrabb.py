@@ -21,7 +21,7 @@ cur = cnx.cursor();
 
 cur.execute("INSERT INTO TABLE EveMineralPrice  ")
 
-#Close the mySQL connection#
+#Close the mySQL connection
 cur.close()
 cnx.close()
 print("Fuck You Roally")
