@@ -26,7 +26,10 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=-1
+current_page=2
+FILE_NAME_0=124;Python;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FEveLpChecker%2FRecources%2Fpython%2FPythonHeader.py;0;4
+FILE_NAME_1=127;Python;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FEveLpChecker%2FEveDataGrabber%2FEveMarketData.py;0;4
+FILE_NAME_2=853;Python;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FEveLpChecker%2FEveDataGrabber%2FEveDataGrabb.py;0;4
 
 [VTE]
 last_dir=/home/pi
