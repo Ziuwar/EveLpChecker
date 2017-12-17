@@ -20,16 +20,19 @@ indent_mode=2
 [project]
 name=EveLpChecker
 base_path=/home/pi/EveLpChecker
+description=
 
 [long line marker]
 long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=2
+current_page=4
 FILE_NAME_0=124;Python;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FEveLpChecker%2FRecources%2Fpython%2FPythonHeader.py;0;4
-FILE_NAME_1=127;Python;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FEveLpChecker%2FEveDataGrabber%2FEveMarketData.py;0;4
-FILE_NAME_2=853;Python;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FEveLpChecker%2FEveDataGrabber%2FEveDataGrabb.py;0;4
+FILE_NAME_1=1351;Python;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FEveLpChecker%2FEveDataGrabber%2FEveMarketData.py;0;4
+FILE_NAME_2=1834;Python;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FEveLpChecker%2FEveDataGrabber%2FEveDataGrabb.py;0;4
+FILE_NAME_3=2388;Python;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FEveLpChecker%2FEveDataDbScripts%2FMySqlDbConf.py;0;4
+FILE_NAME_4=217;SQL;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FEveLpChecker%2FRecources%2Fmysql%2FTableCreation.sql;0;4
 
 [VTE]
 last_dir=/home/pi

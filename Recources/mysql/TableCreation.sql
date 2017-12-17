@@ -5,47 +5,6 @@ create database evedata;
 
 -----------------------------------
 
-CREATE TABLE EveMineralPrice (
-
-	Mineral varchar(50) NOT NULL PRIMARY KEY,
-	ItemUid int,
-	ItemPrice float
-	
-);
-
------------------------------------
-
-CREATE TABLE EvePriceHistory (
-
-	Ident int AUTO_INCREMENT NOT NULL PRIMARY KEY,
-	EveItemId int,
-	PriceTimestamp date
-);
-
-------------------------------------
-
-CREATE TABLE EveItemData (
-
-	ItemUid int NOT NULL PRIMARY KEY,
-	ItemName varchar (100),
-	IskPrice float,
-	LpPoints int,
-	MaterialPrice float,
-	ItemTotalPrice float,
-	SellPriceJita float,
-	SellTaxes float,
-	Profit float,
-	ProfitPercent float,
-	Efficiency float,
-	Tritanium int,
-	Pyerite int,
-	Mexallon int,
-	Isogen int,
-	Nocxium int,
-	Zydrine int,
-	Megacyte int
-);
-
 ------------------------------------
 
 INSERT INTO EveMineralPrice
@@ -61,7 +20,12 @@ INSERT INTO EveMineralPrice
 
 ------------------------------------
 
+INSERT INTO evedata.EveItemData
+	VALUES
+	('33468','Astero','15000000.00','30000','387669.41','15387669.41','62300000.00','1.5','46912330.59','404.87','1400.00','24022','8044','2822','467','40','18','4'),
+	('33470','Stratios','30000000.00','120000','8916771.51','38916771.51','200000000.00','1.5','161083228.49','513.92','1250.00','614356','154233','39907','9687','2387','1202','356');
 
+-----------------------------------
 
 
 

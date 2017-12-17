@@ -2,10 +2,10 @@
 # Company: 		AS-Engineering
 # File: 		EveDataGrabb.py	
 # Name: 		Andreas Schroeder
-# Date: 		16.12.2017
+# Date: 		17.12.2017
 #
 # Description: 	Updates the eve mineral prices in the database
-# Revision: 	R00 Not-tested
+# Revision: 	R00 Tested
 ###########################################
 
 #Library import
@@ -25,6 +25,7 @@ evedata = mysql.connector.connect(user='pi', password='pi', host='127.0.0.1', da
 #Create a database cursor                                                                                                                  
 cursor = evedata.cursor();
 
+#Iterate over the Minerals stored in the EveMinerals variable
 for i in range(0,len(EveMinerals),1):
 ## Step 1 Read the ItemUid from the database
 	cursor.execute(SqlComSelItemUid % EveMinerals[i])

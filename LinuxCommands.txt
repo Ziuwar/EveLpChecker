@@ -1,8 +1,11 @@
 ifconfig --- Netzwerk Konfig
+ip addr show -- Netzwerk Konfig 2
 su --- Switch user
 passwd --- Set new password
 
 
 mysql -upi -p --- User PI
 mysql -uroot -p --- User Root
+
+
 
