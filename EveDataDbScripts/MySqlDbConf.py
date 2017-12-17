@@ -1,7 +1,7 @@
 ###########################################
 # Company: 		AS-Engineering
 # File: 		MySqlDbConf.py	
-# Name: 		Andreas Schröder
+# Name: 		Andreas Schroeder
 # Date: 		16.12.2017
 #
 # Description: 	Configuration of the MySql database used in the EvE Data Project
@@ -28,12 +28,16 @@ cur = cnx.cursor();
 #DROP Tables
 #cur.execute("DROP TABLE evedata.EveItemData;")
 #cur.execute("DROP TABLE evedata.EvePriceHistory;")
-#cur.commitexecute("DROP TABLE evedata.EveMineralPrice;")
+#cur.execute("DROP TABLE evedata.EveMineralPrice;")
 
 #CREATE Tables
 #cur.execute("CREATE TABLE evedata.EveMineralPrice ( Mineral varchar(50) NOT NULL PRIMARY KEY, ItemUid int, ItemPrice float);")
 #cur.execute("CREATE TABLE evedata.EvePriceHistory ( Ident int AUTO_INCREMENT NOT NULL PRIMARY KEY, EveItemId int, PriceTimestamp date);")
 #cur.execute("CREATE TABLE evedata.EveItemData ( ItemUid int NOT NULL PRIMARY KEY, ItemName varchar (100), IskPrice float, LpPoints int, MaterialPrice float, ItemTotalPrice float, SellPriceJita float, SellTaxes float, Profit float, ProfitPercent float, Efficiency float, Tritanium int, Pyerite int, Mexallon int, Isogen int, Nocxium int, Zydrine int, Megacyte int);")
+
+#Fill tables
+
+#cur.execute("INSERT INTO evedata.EveMineralPrice VALUES ('Tritanium','34', '4.79'), ('Pyerite','35', '5.20'), ('Mexallon','36', '63.80'), ('Isogen', '37', '70.00'), ('Nocxium', '38', '416.99'), ('Zydrine', '39', '1309.89'), ('Megacyte', '40', '1090.00');")
 
 #Close the mySQL connection
 cur.close()
