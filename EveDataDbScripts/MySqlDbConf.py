@@ -38,6 +38,7 @@ cur = cnx.cursor();
 #Fill tables
 
 #cur.execute("INSERT INTO evedata.EveMineralPrice VALUES ('Tritanium','34', '4.79'), ('Pyerite','35', '5.20'), ('Mexallon','36', '63.80'), ('Isogen', '37', '70.00'), ('Nocxium', '38', '416.99'), ('Zydrine', '39', '1309.89'), ('Megacyte', '40', '1090.00');")
+#cnx.commit()
 
 #Close the mySQL connection
 cur.close()
