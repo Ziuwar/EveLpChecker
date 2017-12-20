@@ -15,7 +15,7 @@ import json
 
 #Variables
 FuzzUrl = 'https://market.fuzzwork.co.uk/aggregates/?region=60003760&types='
-EveMinerals = "Tritanium","Pyerite" ,"Isogen","Mexallon","Nocxium","Megacyte","Zydrine"
+EveMinerals = ("Tritanium","Pyerite" ,"Isogen","Mexallon","Nocxium","Megacyte","Zydrine")
 #Used SQL commands
 SqlComSelItemUid = ("SELECT ItemUid FROM evedata.EveMineralPrice WHERE Mineral = '%s'") # EveMinerals
 SqlComUpdMinPrice = ("UPDATE evedata.EveMineralPrice SET ItemPrice = '%.2f' WHERE Mineral = '%s'") #ItemPrice, EveMinerals
