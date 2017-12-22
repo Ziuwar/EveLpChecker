@@ -5,7 +5,7 @@
 # Date: 		22.12.2017
 #
 # Description: 	Database functions for the EveLpProject
-# Revision: 	R00 - Not tested
+# Revision: 	R00 - Tested
 ###########################################
 
 import mysql.connector
@@ -38,3 +38,38 @@ def MineralUid(cursor, EveMinerals):
 		ItemUid.append(str(cursor.fetchone()[0]))
 
 	return ItemUid
+
+def UpdateMinerals(cursor, evedata, UidAndPrice):
+	"Updates the mineral prices for all minerals."
+	
+	SqlComUpdMinPrice = ("UPDATE evedata.EveMineralPrice SET ItemPrice = '%.2f' WHERE ItemUid = '%s'") #ItemPrice, EveMinerals
+
+	for Item in UidAndPrice:
+		
+		cursor.execute(SqlComUpdMinPrice % (UidAndPrice[Item], str(Item)))
+		evedata.commit()
+	
+	MineralsUpdated = 'All minerals updated!'
+	return MineralsUpdated
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
