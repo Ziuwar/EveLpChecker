@@ -24,14 +24,17 @@ def UpdateMineralMetaData():
 	MineralUid = DbOps.MineralUid(cursor, DbOps.EveMinerals(cursor))
 	#print MineralUid
 	## Step 2 get the current price for the ItemUid from Fuzzwork
-	UidAndPrice = WwwOps.MineralPrice(MineralUid)
-	#print UidAndPrice
+	UidAndPrice = WwwOps.ItemPrice(MineralUid, 'sell', 'min')
+	print UidAndPrice
 	## Step 3 update the current price into the database
 	Return = DbOps.UpdateMinerals(cursor, evedata, UidAndPrice)
 	#print Return
 	#Close the mySQL connection
 	cursor.close()
 	evedata.close()
+	
+	print('\n' + Return + '\n')
+	
 	return Return
 
 

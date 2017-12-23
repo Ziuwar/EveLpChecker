@@ -12,13 +12,15 @@ import requests
 import json
 
 #Using the very nice Fuzzwork API
+#url = 'https://www.fuzzwork.co.uk/api/typeid.php?typename=Tritanium'       #TypeID
+#url = 'https://www.fuzzwork.co.uk/api/typeid.php?typename='                #TypeID
 FuzzUrl = 'https://market.fuzzwork.co.uk/aggregates/?region=60003760&types='
 UidAndPrice = {}
 
-def MineralPrice(MineralUid):
+def ItemPrice(ItemUid , SellBuy, DataField):
 	"Gets the market data for the given UID, has do be reworked for all items and data items"
 
-	for Item in MineralUid:
+	for Item in ItemUid:
 		FinalUrl = FuzzUrl+Item
 		PageResponse = requests.get(FinalUrl)
 		
@@ -28,8 +30,8 @@ def MineralPrice(MineralUid):
 		#Json to dict and get the desired data item
 		JsonPageOutput = PageResponse.text
 		PhytonPageOutput = json.loads(JsonPageOutput)
-		ItemPrice = float(PhytonPageOutput [Item]['sell']['min'])
+		ItemData = float(PhytonPageOutput [Item][SellBuy][DataField])
 		#Build a dict with item UID:Price
-		UidAndPrice.update({Item:ItemPrice})
+		UidAndPrice.update({Item:ItemData})
 	
 	return UidAndPrice

@@ -52,24 +52,47 @@ def UpdateMinerals(cursor, evedata, UidAndPrice):
 	MineralsUpdated = 'All minerals updated!'
 	return MineralsUpdated
 	
+def LpItemUid(cursor):
+	"Get the item Uid per item in the database"
 	
+	SqlComSelItemUid = ("SELECT ItemUid FROM evedata.EveItemData")
+	ItemUid = []
+		
+	cursor.execute(SqlComSelItemUid)
 	
+	DbItemUid = cursor.fetchall()
 	
+	for row in DbItemUid:
+		ItemUid.append(str(row[0]))
+
+	return ItemUid	
+
+def UpdateLpJitaPrice(cursor, evedata, UidAndPrice):
+	"Update the Jita max sell price for all items."
 	
+	SqlComUpdMaxBuy = ("UPDATE evedata.EveItemData SET SellPriceJita = '%.2f' WHERE ItemUid = '%s'") #ItemPrice, EveMinerals
+
+	for Item in UidAndPrice:
+		
+		cursor.execute(SqlComUpdMaxBuy % (UidAndPrice[Item], str(Item)))
+		evedata.commit()
 	
+	LpUpdated = 'All minerals updated!'
+	return LpUpdated	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+def SelectCalcData(cursor):
+	"Select all the data needed for the calculation task"
+
+	SqlCommand = 'SELECT ItemUid, IskPrice, LpPoints, SellPriceJita, Tritanium, Pyerite, Mexallon, Isogen, Nocxium, Zydrine, Megacyte FROM EveItemData ORDER BY ItemUid;'
+	EveMineral = []
+
+	cursor.execute(SqlCommand)
+
+	fetch = cursor.fetchall()
+
+	for row in fetch:
+		EveMineral.append(str(row[0]))
+ 
+	return EveMineral 
+
 	
