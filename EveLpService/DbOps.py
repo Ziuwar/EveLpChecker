@@ -81,18 +81,35 @@ def UpdateLpJitaPrice(cursor, evedata, UidAndPrice):
 	return LpUpdated	
 	
 def SelectCalcData(cursor):
-	"Select all the data needed for the calculation task"
+	"Select the data needed for the calculation task for one given item"
 
 	SqlCommand = 'SELECT ItemUid, IskPrice, LpPoints, SellPriceJita, Tritanium, Pyerite, Mexallon, Isogen, Nocxium, Zydrine, Megacyte FROM EveItemData ORDER BY ItemUid;'
-	EveMineral = []
+	EveCalcData = {}
+	RowCount = 0
+	
+	cursor.execute(SqlCommand)
+	fetch = cursor.fetchall()
+
+	for row in fetch: #Generates a dict with {ItemUid{Items}}
+		
+		EveCalcData.update({fetch[RowCount][0]:{"IskPrice":fetch[RowCount][1],"LpPoints":fetch[RowCount][2],"SellPriceJita":fetch[RowCount][3],
+		"Tritanium":fetch[RowCount][4],"Pyerite":fetch[RowCount][5],"Mexallon":fetch[RowCount][6],"Isogen":fetch[RowCount][7],
+		"Nocxium":fetch[RowCount][8],"Zydrine":fetch[RowCount][9],"Megacyte":fetch[RowCount][10]}})
+		RowCount = RowCount + 1
+ 
+	return EveCalcData
+
+def MineralsAndPrice(cursor):
+	"Get all minerals with prices from the database in a dict"
+
+	SqlCommand = 'select Mineral,ItemPrice from EveMineralPrice order by ItemUid;'
+	MineralAndPrice = {}
 
 	cursor.execute(SqlCommand)
-
 	fetch = cursor.fetchall()
 
 	for row in fetch:
-		EveMineral.append(str(row[0]))
+		
+		MineralAndPrice.update({str(row[0]) : row[1]})
  
-	return EveMineral 
-
-	
+	return MineralAndPrice
