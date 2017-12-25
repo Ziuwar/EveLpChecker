@@ -33,21 +33,22 @@ def print_time(threadName, counter, delay):
     while counter:
 		
         if ExitFlag:
-            threadName.exit()
-            
-        time.sleep(delay)
+            threadName.exit()    
+       
+       
+        print("\n\n%s: %s\n\n" % (threadName, time.ctime()))
+       
         EveMineralPrice.UpdateMineralMetaData()
         time.sleep(1)
         EveMarketData.UpdateJitaMaxSell()
         time.sleep(1)
         EveLpCalc.ItemUpdate()
         
-        print("\n\n%s: %s\n\n" % (threadName, time.ctime()))
-        
-        counter -= 1
+        time.sleep(delay)
+        #counter -= 1
 
 #Create new threads
-Calc1 = CalcThread(1,'Eve LP server',60)
+Calc1 = CalcThread(1,'Eve LP server',298)
 
 #Start new Thread
 Calc1.start()

@@ -58,7 +58,7 @@ def ItemUpdate():
 		ItemsUpdated = DbOps.UpdateItemData(cursor, evedata, ItemUid, Calculated)
 		Count = Count + 1
 			
-	print '###- ' + str(Count) + ' item values calculated and updated - ###\n'
+	print '### - ' + str(Count) + ' item values calculated and updated - ###\n'
 
 	#Close the mySQL connection
 	cursor.close()
