@@ -39,17 +39,17 @@ def MineralUid(cursor, EveMinerals):
 
 	return ItemUid
 
-def UpdateMinerals(cursor, evedata, UidAndPrice):
+def UpdateMinerals(cursor, evedata, UidAndPriceM):
 	"Updates the mineral prices for all minerals."
 	
 	SqlComUpdMinPrice = ("UPDATE evedata.EveMineralPrice SET ItemPrice = '%.2f' WHERE ItemUid = '%s'") #ItemPrice, EveMinerals
 
-	for Item in UidAndPrice:
-		
-		cursor.execute(SqlComUpdMinPrice % (UidAndPrice[Item], str(Item)))
-		evedata.commit()
+	for Item in UidAndPriceM:	
+		cursor.execute(SqlComUpdMinPrice % (UidAndPriceM[Item], str(Item)))
 	
-	MineralsUpdated = 'All minerals updated!'
+	evedata.commit()
+	
+	MineralsUpdated = '### - ' + str(len(UidAndPriceM)) + ' minerals updated! - ###\n'
 	return MineralsUpdated
 	
 def LpItemUid(cursor):
@@ -67,17 +67,19 @@ def LpItemUid(cursor):
 
 	return ItemUid	
 
-def UpdateLpJitaPrice(cursor, evedata, UidAndPrice):
+def UpdateLpJitaPrice(cursor, evedata, UidAndPriceJ):
 	"Update the Jita max sell price for all items."
 	
 	SqlComUpdMaxBuy = ("UPDATE evedata.EveItemData SET SellPriceJita = '%.2f' WHERE ItemUid = '%s'") #ItemPrice, EveMinerals
-
-	for Item in UidAndPrice:
-		
-		cursor.execute(SqlComUpdMaxBuy % (UidAndPrice[Item], str(Item)))
-		evedata.commit()
+	Count = 0
 	
-	LpUpdated = 'All minerals updated!'
+	for Item in UidAndPriceJ:
+		cursor.execute(SqlComUpdMaxBuy % (UidAndPriceJ[Item], str(Item)))
+		Count = Count + 1
+
+	evedata.commit()
+	
+	LpUpdated = '### - ' + str(Count) + ' Jita item prices updated! - ###\n'
 	return LpUpdated	
 	
 def SelectCalcData(cursor):
@@ -113,3 +115,16 @@ def MineralsAndPrice(cursor):
 		MineralAndPrice.update({str(row[0]) : row[1]})
  
 	return MineralAndPrice
+
+def UpdateItemData(cursor, evedata, ItemUid, Calculated):
+	"Update the Jita max sell price for all items."
+	
+	SqlComUpdMaxBuy = ("UPDATE evedata.EveItemData SET %s = '%.2f' WHERE ItemUid = '%s'") #ColName, Value, UidValue
+
+	for Item in Calculated:
+		cursor.execute(SqlComUpdMaxBuy % (Item,Calculated[Item], str(ItemUid)))
+	
+	evedata.commit()
+	
+	ItemsUpdated = 'Item data updated'
+	return ItemsUpdated	

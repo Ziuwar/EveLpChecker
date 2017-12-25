@@ -21,47 +21,47 @@ def Calculator(MineralPrice, MineralNeed, LpStoreItemPrice, SellPriceJita, LpSto
 	PriceTotal = EveDataMath.TotalPrice(LpStoreItemPrice, MineralTotal)
 	Profit = EveDataMath.ItemProfit(SellPriceJita, PriceTotal)
 	ProfitLp = EveDataMath.LpEfficiency(Profit['ISK'], LpStoreLpCost)
-
-	#print('Mineral total price : %.2f' % (MineralTotal))
-	#print('Total price from BP: %.2f' % (PriceTotal))
-	#print('Total profit in ISK: %.2f' % (Profit['ISK']))
-	#print('Total profit in percent: %.2f' % (Profit['Percent']))
-	#print('Efficiency (Profit/LP): %.2f' % (ProfitLp))
     
 	Calculated.update({"MaterialPrice": MineralTotal,"ItemTotalPrice": PriceTotal,"Profit": Profit['ISK'],"ProfitPercent":Profit['Percent'],"Efficiency":ProfitLp})
 
 	return Calculated
+
  
-#Open mySQL connection
-evedata = mysql.connector.connect(user='pi', password='pi', host='127.0.0.1', database='evedata') 
-#Create a database cursor                                                                                                                  
-cursor = evedata.cursor();
-
-##1. Step: 	Get the item meta data from the database, so mineral need, Lp store ISK price, Lp Store Lp
-## 			cost and the sell price in Jita
-CalcData = DbOps.SelectCalcData(cursor)
-#print CalcData
-##2. Step:	Get the mineral prices from the database
-MineralPrice = DbOps.MineralsAndPrice(cursor)
-#print MineralPrice
-'''!!! The following steps must be done per ItemUid in CalcData !!!'''
-for ItemUid in CalcData:
+def ItemUpdate():
 	
-	MineralNeed = deepcopy(CalcData [ItemUid])
-	del(MineralNeed['IskPrice'],MineralNeed['LpPoints'],MineralNeed['SellPriceJita'])
-	#print MineralNeed
+	Count = 0
+ 
+	#Open mySQL connection
+	evedata = mysql.connector.connect(user='pi', password='pi', host='127.0.0.1', database='evedata') 
+	#Create a database cursor                                                                                                                  
+	cursor = evedata.cursor();
 	
-	##3. Step: Calculate stuff
-	Calculated = Calculator(MineralPrice,MineralNeed,CalcData[ItemUid]['IskPrice'],CalcData[ItemUid]['SellPriceJita'],CalcData[ItemUid]['LpPoints'])
-	print Calculated
-	
-	##4. Step: Write the calculated values into the database
+	##1. Step: 	Get the item meta data from the database, so mineral need, Lp store ISK price, Lp Store Lp
+	## 			cost and the sell price in Jita
+	CalcData = DbOps.SelectCalcData(cursor)
+	#print CalcData
+	##2. Step:	Get the mineral prices from the database
+	MineralPrice = DbOps.MineralsAndPrice(cursor)
+	#print MineralPrice
+	'''!!! The following steps must be done per ItemUid in CalcData !!!'''
+	for ItemUid in CalcData:
+		
+		MineralNeed = deepcopy(CalcData [ItemUid])
+		del(MineralNeed['IskPrice'],MineralNeed['LpPoints'],MineralNeed['SellPriceJita'])
+		#print MineralNeed
+		
+		##3. Step: Calculate stuff
+		Calculated = Calculator(MineralPrice,MineralNeed,CalcData[ItemUid]['IskPrice'],CalcData[ItemUid]['SellPriceJita'],CalcData[ItemUid]['LpPoints'])
+		#print Calculated
+		
+		##4. Step: Write the calculated values into the database
+		ItemsUpdated = DbOps.UpdateItemData(cursor, evedata, ItemUid, Calculated)
+		Count = Count + 1
+			
+	print '###- ' + str(Count) + ' item values calculated and updated - ###\n'
 
+	#Close the mySQL connection
+	cursor.close()
+	evedata.close()
 
-
-
-#Close the mySQL connection
-cursor.close()
-evedata.close()
-
-## The End
+	## The End

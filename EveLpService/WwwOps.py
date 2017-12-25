@@ -20,6 +20,8 @@ UidAndPrice = {}
 def ItemPrice(ItemUid , SellBuy, DataField):
 	"Gets the market data for the given UID, has do be reworked for all items and data items"
 
+	UidAndPrice = {}
+
 	for Item in ItemUid:
 		FinalUrl = FuzzUrl+Item
 		PageResponse = requests.get(FinalUrl)

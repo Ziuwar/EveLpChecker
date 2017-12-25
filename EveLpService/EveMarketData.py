@@ -32,3 +32,4 @@ def UpdateJitaMaxSell():
 	cursor.close()
 	evedata.close()
 	return Result
+	
