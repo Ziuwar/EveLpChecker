@@ -1,4 +1,4 @@
-###########################################
+############################################
 # Company: 		AS-Engineering
 # File: 		EveMineralPrice.py	
 # Name: 		Andreas Schroeder
@@ -6,7 +6,7 @@
 #
 # Description: 	Updates the eve mineral prices in the database
 # Revision: 	R01 Tested
-###########################################
+############################################
 
 #Library import
 import mysql.connector
