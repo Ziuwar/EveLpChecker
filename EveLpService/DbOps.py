@@ -42,7 +42,7 @@ def MineralUid(cursor, EveMinerals):
 def UpdateMinerals(cursor, evedata, UidAndPriceM):
 	"Updates the mineral prices for all minerals."
 	
-	SqlComUpdMinPrice = ("UPDATE evedata.EveMineralPrice SET item_price = '%.2f' WHERE ItemUid = '%s'") #ItemPrice, EveMinerals
+	SqlComUpdMinPrice = ("UPDATE evedata.EveMineralPrice SET ItemPrice = '%.2f' WHERE ItemUid = '%s'") #ItemPrice, EveMinerals
 
 	for Item in UidAndPriceM:	
 		cursor.execute(SqlComUpdMinPrice % (UidAndPriceM[Item], str(Item)))
@@ -104,7 +104,7 @@ def SelectCalcData(cursor):
 def MineralsAndPrice(cursor):
 	"Get all minerals with prices from the database in a dict"
 
-	SqlCommand = 'select Mineral,item_price from EveMineralPrice order by ItemUid;'
+	SqlCommand = 'select Mineral,ItemPrice from EveMineralPrice order by ItemUid;'
 	MineralAndPrice = {}
 
 	cursor.execute(SqlCommand)

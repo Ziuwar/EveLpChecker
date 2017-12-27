@@ -22,7 +22,7 @@ def UpdateJitaMaxSell():
 	LpItemUid = DbOps.LpItemUid(cursor)
 	#print LpItemUid
 	##Step 2: Get the max buy price in Jita from Fuzzwork
-	UidAndPrice = WwwOps.ItemPrice(LpItemUid, 'buy', 'max')
+	UidAndPrice = WwwOps.item_price(LpItemUid, 'buy', 'max')
 	#print UidAndPrice
 	##Step 3: Update the new price for the Lp store items in the database
 	Result = DbOps.UpdateLpJitaPrice(cursor, evedata, UidAndPrice)
