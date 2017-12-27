@@ -21,7 +21,7 @@ class EveLpApp(wx.Frame):
         # Make me a little grid you codeing bitch, thanks.
         LpPanel = wx.Panel(self, wx.ID_ANY)
         self.grid = gridlib.Grid(LpPanel)
-        self.grid.CreateGrid(25,9)
+        self.grid.CreateGrid(25, 9)
         self.grid.EnableEditing(False)
         # Box layout
         Sizer = wx.BoxSizer(wx.VERTICAL)
@@ -32,7 +32,7 @@ class EveLpApp(wx.Frame):
         self.grid.SetColLabelValue(0, 'Item Name')
         self.grid.SetColSize(0,110)
         self.grid.SetColLabelValue(1, 'Price [ISK]')
-        self.grid.SetColFormatFloat(1, -1 , 2)
+        self.grid.SetColFormatFloat(1, -1, 2)
         self.grid.SetColSize(1,110)
         self.grid.SetColLabelValue(2, 'LP Cost [EA]')
         self.grid.SetColFormatNumber(2)
