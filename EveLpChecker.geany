@@ -27,8 +27,9 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=0
-FILE_NAME_0=978;Python;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FEveLpChecker%2FEveLpService%2FEveLpThread.py;0;4
+current_page=1
+FILE_NAME_0=987;Python;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FEveLpChecker%2FEveLpService%2FEveLpThread.py;0;4
+FILE_NAME_1=343;Python;0;EUTF-8;1;1;0;%2Fhome%2Fpi%2FEveLpChecker%2FEveLpService%2FWwwOps.py;0;4
 
 [VTE]
 last_dir=/home/pi
