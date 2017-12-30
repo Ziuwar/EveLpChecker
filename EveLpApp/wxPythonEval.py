@@ -2,6 +2,7 @@
 
 import wx
 import wx.grid as gridlib
+import mysql.connector
 
 
 class EveLpApp(wx.Frame):
@@ -63,7 +64,9 @@ class EveLpApp(wx.Frame):
         FileMenu = wx.Menu()
         FileMenu.Append(wx.ID_NEW, '&New')
         FileMenu.Append(wx.ID_DELETE, '&Delete')
-        FileMenu.Append(wx.ID_ANY, '&Update\tAlt+F5')
+        update = wx.MenuItem(FileMenu, wx.ID_ANY, '&Update\tAlt+F5')
+        FileMenu.Append(update)
+
         FileMenu.AppendSeparator()
         Qmi = wx.MenuItem(FileMenu, wx.ID_EXIT, '&Quit\tAlt+F4')
         # Qmi.SetBitmap(wx.Bitmap('exit.png'))
@@ -75,6 +78,7 @@ class EveLpApp(wx.Frame):
 
         # Bound functions in the menu bar
         self.Bind(wx.EVT_MENU, self.on_quit, Qmi)
+        self.Bind(wx.EVT_MENU, self.fill_table, update)
 
         # Append the menus to the bar
         MenuBar.Append(FileMenu, '&File')
@@ -82,18 +86,45 @@ class EveLpApp(wx.Frame):
         self.SetMenuBar(MenuBar)
 
     # Method for filling the table with data
-    def fill_table(self):
-        GridFill = ('Astero', 15000000.00, 30000, 387669.41, 15387669.41, 62300000.00, 46912330.59, 404.87 , 1563.74)
-        for i in range(0,len(GridFill),1):
-            value = str(GridFill[i])
-            self.grid.SetCellValue(0, i, value)
+    def fill_table(self, *args):
+        """Data fields are: ItemName,IskPrice,LpPoints,MaterialPrice,ItemTotalPrice,SellPriceJita,Profit,ProfitPercent
+           and Efficiency """
+
+        grid_fill = grid_data_get()
+        for row in range(0, len(grid_fill), 1):
+            for item in range(0, len(grid_fill[row]), 1):
+                self.grid.SetCellValue(row, item, str(grid_fill[row][item]))
 
     # Method to close the instance
     def on_quit(self, e):
         self.Close()
+        print('CLOSE')
+
+
+def grid_data_get():
+    """Gets the all items in the evedata.EveItemData table for the user interface grid"""
+
+    sql_command = 'SELECT ItemName,IskPrice,LpPoints,MaterialPrice,ItemTotalPrice,SellPriceJita,Profit,ProfitPercent,' \
+                  'Efficiency FROM evedata.EveItemData ORDER BY Efficiency DESC LIMIT 25;'
+
+    # Open mySQL connection
+    evedata = mysql.connector.connect(user='remote', password='remote', host='192.168.178.25', database='evedata')
+    # Create a database cursor
+    cursor = evedata.cursor()
+
+    cursor.execute(sql_command)
+    grid_data_fetch = cursor.fetchall()
+
+    # Close the mySQL connection
+    cursor.close()
+    evedata.close()
+
+    # Returns a python list like: [('Item1'),('Item2')]
+    return grid_data_fetch
 
 
 def main():
+
     app = wx.App()
     x = EveLpApp(None, title='EveLpApp')
     # x.grid.SetCellValue(1,0,'FUCK')
