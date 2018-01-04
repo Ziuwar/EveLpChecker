@@ -31,31 +31,31 @@ class EveLpApp(wx.Frame):
         # Column config
         self.grid.SetColMinimalAcceptableWidth(110)
         self.grid.SetColLabelValue(0, 'Item Name')
-        self.grid.SetColSize(0,110)
+        self.grid.SetColSize(0, 110)
         self.grid.SetColLabelValue(1, 'Price [ISK]')
         self.grid.SetColFormatFloat(1, -1, 2)
-        self.grid.SetColSize(1,110)
+        self.grid.SetColSize(1, 110)
         self.grid.SetColLabelValue(2, 'LP Cost [EA]')
         self.grid.SetColFormatNumber(2)
-        self.grid.SetColSize(2,110)
+        self.grid.SetColSize(2, 110)
         self.grid.SetColLabelValue(3, 'Mineral Cost [ISK]')
-        self.grid.SetColFormatFloat(3, -1 , 2)
-        self.grid.SetColSize(3,110)
+        self.grid.SetColFormatFloat(3, -1, 2)
+        self.grid.SetColSize(3, 110)
         self.grid.SetColLabelValue(4, 'Total Cost [ISK]')
-        self.grid.SetColFormatFloat(4, -1 , 2)
-        self.grid.SetColSize(4,110)
+        self.grid.SetColFormatFloat(4, -1, 2)
+        self.grid.SetColSize(4, 110)
         self.grid.SetColLabelValue(5, 'Sell Price Jita [ISK]')
-        self.grid.SetColFormatFloat(5, -1 , 2)
-        self.grid.SetColSize(5,110)
+        self.grid.SetColFormatFloat(5, -1, 2)
+        self.grid.SetColSize(5, 110)
         self.grid.SetColLabelValue(6, 'Profit [ISK]')
-        self.grid.SetColFormatFloat(6, -1 , 2)
-        self.grid.SetColSize(6,110)
+        self.grid.SetColFormatFloat(6, -1, 2)
+        self.grid.SetColSize(6, 110)
         self.grid.SetColLabelValue(7, 'Profit [%]')
-        self.grid.SetColFormatFloat(7, -1 , 2)
-        self.grid.SetColSize(7,110)
+        self.grid.SetColFormatFloat(7, -1, 2)
+        self.grid.SetColSize(7, 110)
         self.grid.SetColLabelValue(8, 'Efficiency [ISK/LP]')
-        self.grid.SetColFormatFloat(8, -1 , 2)
-        self.grid.SetColSize(8,110)
+        self.grid.SetColFormatFloat(8, -1, 2)
+        self.grid.SetColSize(8, 110)
 
         # Create a menu bar
         MenuBar = wx.MenuBar()
@@ -94,6 +94,13 @@ class EveLpApp(wx.Frame):
         for row in range(0, len(grid_fill), 1):
             for item in range(0, len(grid_fill[row]), 1):
                 self.grid.SetCellValue(row, item, str(grid_fill[row][item]))
+
+    # Method for the new item dialog
+    def new_item(self, *args):
+
+        # Create a box for the new item dialog
+        new_item_panel = wx.Panel(self, wx.ID_ANY)
+
 
     # Method to close the instance
     def on_quit(self, e):
