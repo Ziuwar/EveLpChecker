@@ -7,6 +7,7 @@
 import wx
 import requests
 import json
+import mysql.connector
 
 
 class NewItem(wx.Frame):
@@ -17,6 +18,8 @@ class NewItem(wx.Frame):
         self.item_name_t = wx.TextCtrl(self, wx.ID_ANY, "")
         self.item_uid_t = wx.TextCtrl(self, wx.ID_ANY, "")
         self.query_b = wx.Button(self, wx.ID_ANY, "Query  UID")
+        self.isk_price_t = wx.TextCtrl(self, wx.ID_ANY, "")
+        self.lp_price_t = wx.TextCtrl(self, wx.ID_ANY, "")
         self.tritanium_t = wx.TextCtrl(self, wx.ID_ANY, "")
         self.pyerite_t = wx.TextCtrl(self, wx.ID_ANY, "")
         self.mexallon_t = wx.TextCtrl(self, wx.ID_ANY, "")
@@ -44,9 +47,10 @@ class NewItem(wx.Frame):
     def set_bind(self):
         self.Bind(wx.EVT_BUTTON, self.on_quit, self.close_b)
         self.Bind(wx.EVT_BUTTON, self.item_uid, self.query_b)
+        self.Bind(wx.EVT_BUTTON, self.insert_db, self.insert_b)
 
     def item_uid(self, *args):
-        """Gets the uid for the give item names, item_name is expected as list like: ['Tritanium']"""
+        """Gets the uid for the give item names, item_name is expected as string like: 'Tritanium'"""
 
         uid_url = 'https://www.fuzzwork.co.uk/api/typeid.php?typename='  # TypeID
         item_name = self.item_name_t.GetValue()
@@ -66,13 +70,42 @@ class NewItem(wx.Frame):
 
         self.item_uid_t.Clear()
         self.item_uid_t.WriteText(str(www_item_uid['typeID']))
+        # End of item_uid method
 
-    # End of item_uid method
+    def insert_db(self, *args):
+        """Inserts a new item into the database with the values from the user interface"""
 
-    # Method to close the instance
+        sql_0 = "INSERT INTO evedata.EveItemData VALUES "
+        sql_1 = "('%s','%s','%s','%s'" % (self.item_uid_t.GetValue(), self.item_name_t.GetValue(),
+                                          self.isk_price_t.GetValue(), self.lp_price_t.GetValue())
+        sql_2 = ",'0','0','0','1.5','0','0','0',"
+        sql_3 = "'%s','%s','%s','%s','%s','%s','%s');" % (self.tritanium_t.GetValue(), self.pyerite_t.GetValue(),
+                                                          self.mexallon_t.GetValue(), self.isogen_t.GetValue(),
+                                                          self.nocxium_t.GetValue(), self.zydrine_t.GetValue(),
+                                                          self.megacyte_t.GetValue())
+
+        sql_command = sql_0+sql_1+sql_2+sql_3
+
+        # Open mySQL connection
+        evedata = mysql.connector.connect(user='remote', password='remote', host='192.168.178.25', database='evedata')
+        # Create a database cursor
+        cursor = evedata.cursor()
+
+        cursor.execute(sql_command)
+        evedata.commit()
+
+        # Close the mySQL connection
+        cursor.close()
+        evedata.close()
+
+        # Returns a python list like: [('Item1'),('Item2')]
+
     def on_quit(self, e):
+        """Method to close the instance"""
+
         self.Close()
         # print('CLOSE')
+        # End of on_quit
 
     def __do_layout(self):
         # begin wxGlade: MyFrame.__do_layout
@@ -84,15 +117,19 @@ class NewItem(wx.Frame):
         uid_l.SetFont(wx.Font(12, wx.DEFAULT, wx.NORMAL, wx.BOLD, 0, ""))
         grid_sizer_1.Add(uid_l, 0, 0)
         grid_sizer_1.Add((0, 0), 0, 0, 0)
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
+        isk_price_l = wx.StaticText(self, wx.ID_ANY, "ISK Price")
+        isk_price_l.SetFont(wx.Font(12, wx.DEFAULT, wx.NORMAL, wx.BOLD, 0, ""))
+        grid_sizer_1.Add(isk_price_l, 0, 0)
+        lp_price_l = wx.StaticText(self, wx.ID_ANY, "LP Price")
+        lp_price_l.SetFont(wx.Font(12, wx.DEFAULT, wx.NORMAL, wx.BOLD, 0, ""))
+        grid_sizer_1.Add(lp_price_l, 0, 0)
         grid_sizer_1.Add((0, 0), 0, 0, 0)
         grid_sizer_1.Add((0, 0), 0, 0, 0)
         grid_sizer_1.Add(self.item_name_t, 0, 0, 0)
         grid_sizer_1.Add(self.item_uid_t, 0, 0, 0)
         grid_sizer_1.Add(self.query_b, 0, wx.EXPAND, 0)
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
-        grid_sizer_1.Add((0, 0), 0, 0, 0)
+        grid_sizer_1.Add(self.isk_price_t, 0, 0, 0)
+        grid_sizer_1.Add(self.lp_price_t, 0, 0, 0)
         grid_sizer_1.Add((0, 0), 0, 0, 0)
         grid_sizer_1.Add((0, 0), 0, 0, 0)
         grid_sizer_1.Add((0, 0), 0, 0, 0)
@@ -151,7 +188,7 @@ class NewItem(wx.Frame):
         self.SetSize((830, 260))
         # end wxGlade
 
-# end of class MyFrame
+# end of class NewItem
 
 
 class MyApp(wx.App):
