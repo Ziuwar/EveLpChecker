@@ -191,7 +191,7 @@ class NewItem(wx.Frame):
 # end of class NewItem
 
 
-class MyApp(wx.App):
+"""class MyApp(wx.App):
     def OnInit(self):
         self.new_item = NewItem(None, wx.ID_ANY, "")
         self.SetTopWindow(self.new_item)
@@ -203,4 +203,4 @@ class MyApp(wx.App):
 
 if __name__ == "__main__":
     app = MyApp(0)
-    app.MainLoop()
+    app.MainLoop()"""

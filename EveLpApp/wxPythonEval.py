@@ -3,6 +3,7 @@
 import wx
 import wx.grid as gridlib
 import mysql.connector
+import NewItem
 
 
 class EveLpApp(wx.Frame):
@@ -62,7 +63,8 @@ class EveLpApp(wx.Frame):
 
         # Create the file menu in the menu bar
         FileMenu = wx.Menu()
-        FileMenu.Append(wx.ID_NEW, '&New')
+        new = wx.MenuItem(FileMenu, wx.ID_NEW, '&New')
+        FileMenu.Append(new)
         FileMenu.Append(wx.ID_DELETE, '&Delete')
         update = wx.MenuItem(FileMenu, wx.ID_ANY, '&Update\tAlt+F5')
         FileMenu.Append(update)
@@ -79,6 +81,7 @@ class EveLpApp(wx.Frame):
         # Bound functions in the menu bar
         self.Bind(wx.EVT_MENU, self.on_quit, Qmi)
         self.Bind(wx.EVT_MENU, self.fill_table, update)
+        self.Bind(wx.EVT_MENU, self.new_item, new)
 
         # Append the menus to the bar
         MenuBar.Append(FileMenu, '&File')
@@ -98,14 +101,15 @@ class EveLpApp(wx.Frame):
     # Method for the new item dialog
     def new_item(self, *args):
 
-        # Create a box for the new item dialog
-        new_item_panel = wx.Panel(self, wx.ID_ANY)
-
+        self.new_item = NewItem.NewItem(None, wx.ID_ANY, "")
+        self.new_item.Show()
+        return True
 
     # Method to close the instance
     def on_quit(self, e):
+
         self.Close()
-        print('CLOSE')
+        # print('CLOSE')
 
 
 def grid_data_get():
