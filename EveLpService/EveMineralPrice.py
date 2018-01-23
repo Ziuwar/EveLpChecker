@@ -17,7 +17,7 @@ def UpdateMineralMetaData():
 	"Update of the mineral prices"
 	
 	#Open mySQL connection
-	evedata = mysql.connector.connect(user='pi', password='pi', host='127.0.0.1', database='evedata') 
+	evedata = mysql.connector.connect(user='root', password='root00Long', host='127.0.0.1', database='evecalc')
 	#Create a database cursor                                                                                                                  
 	cursor = evedata.cursor();
 	##Step 1 get the minerals and cross check that every mineral has a UID

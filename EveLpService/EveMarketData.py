@@ -14,7 +14,7 @@ import WwwOps, DbOps
 def UpdateJitaMaxSell():
 
 	#Open mySQL connection
-	evedata = mysql.connector.connect(user='pi', password='pi', host='127.0.0.1', database='evedata') 
+	evedata = mysql.connector.connect(user='root', password='root00Long', host='127.0.0.1', database='evecalc')
 	#Create a database cursor                                                                                                                  
 	cursor = evedata.cursor();
 
