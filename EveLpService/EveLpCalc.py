@@ -32,9 +32,9 @@ def ItemUpdate():
 	Count = 0
  
 	#Open mySQL connection
-	evedata = mysql.connector.connect(user='root', password='root00Long', host='127.0.0.1', database='evecalc')
+	evecalc = mysql.connector.connect(user='root', password='root00Long', host='127.0.0.1', database='evecalc')
 	#Create a database cursor                                                                                                                  
-	cursor = evedata.cursor();
+	cursor = evecalc.cursor();
 	
 	##1. Step: 	Get the item meta data from the database, so mineral need, Lp store ISK price, Lp Store Lp
 	## 			cost and the sell price in Jita
@@ -55,13 +55,13 @@ def ItemUpdate():
 		#print Calculated
 		
 		##4. Step: Write the calculated values into the database
-		ItemsUpdated = DbOps.UpdateItemData(cursor, evedata, ItemUid, Calculated)
+		ItemsUpdated = DbOps.UpdateItemData(cursor, evecalc, ItemUid, Calculated)
 		Count = Count + 1
 			
 	print '### - ' + str(Count) + ' item values calculated and updated - ###\n'
 
 	#Close the mySQL connection
 	cursor.close()
-	evedata.close()
+	evecalc.close()
 
 	## The End

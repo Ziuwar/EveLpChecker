@@ -1,4 +1,4 @@
-# Math functions in Python for the evedata project
+# Math functions in Python for the evecalc project
 
 def MineralPriceCalc(MineralPrice, MineralNeed):
     "Calculation of the total mineral price of a given item from the database"
