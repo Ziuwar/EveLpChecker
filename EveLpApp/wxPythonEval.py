@@ -119,16 +119,16 @@ def grid_data_get():
                   'Efficiency FROM evedata.EveItemData ORDER BY Efficiency DESC LIMIT 25;'
 
     # Open mySQL connection
-    evedata = mysql.connector.connect(user='remote', password='remote', host='192.168.178.25', database='evedata')
+    evecalc = mysql.connector.connect(user='root', password='root00Long', host='h2759962.stratoserver.net', database='evecalc')
     # Create a database cursor
-    cursor = evedata.cursor()
+    cursor = evecalc.cursor()
 
     cursor.execute(sql_command)
     grid_data_fetch = cursor.fetchall()
 
     # Close the mySQL connection
     cursor.close()
-    evedata.close()
+    evecalc.close()
 
     # Returns a python list like: [('Item1'),('Item2')]
     return grid_data_fetch
