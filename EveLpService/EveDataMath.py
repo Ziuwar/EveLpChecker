@@ -19,7 +19,7 @@ def ItemProfit (SellPriceJita, PriceTotal):
     # Profit in ISK
     ProfitCombined['ISK'] = SellPriceJita - PriceTotal
     # Profit in %
-    ProfitCombined['Percent'] = SellPriceJita / PriceTotal * 100
+    ProfitCombined['Percent'] = ProfitCombined['ISK'] / PriceTotal * 100
     return ProfitCombined
 
 def LpEfficiency(ProfitIsk, LoyaltyPoints):
