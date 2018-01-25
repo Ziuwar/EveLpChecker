@@ -116,10 +116,10 @@ def grid_data_get():
     """Gets the all items in the evedata.EveItemData table for the user interface grid"""
 
     sql_command = 'SELECT ItemName,IskPrice,LpPoints,MaterialPrice,ItemTotalPrice,SellPriceJita,Profit,ProfitPercent,' \
-                  'Efficiency FROM evedata.EveItemData ORDER BY Efficiency DESC LIMIT 25;'
+                  'Efficiency FROM evecalc.EveItemData ORDER BY Efficiency DESC LIMIT 25;'
 
     # Open mySQL connection
-    evecalc = mysql.connector.connect(user='root', password='root00Long', host='h2759962.stratoserver.net', database='evecalc')
+    evecalc = mysql.connector.connect(user='remote', password='remote00Long', host='h2759962.stratoserver.net', database='evecalc')
     # Create a database cursor
     cursor = evecalc.cursor()
 
