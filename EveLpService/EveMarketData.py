@@ -14,9 +14,9 @@ import WwwOps, DbOps
 def UpdateJitaMaxSell():
 
 	#Open mySQL connection
-	evedata = mysql.connector.connect(user='pi', password='pi', host='127.0.0.1', database='evedata') 
+	evecalc = mysql.connector.connect(user='root', password='root00Long', host='127.0.0.1', database='evecalc')
 	#Create a database cursor                                                                                                                  
-	cursor = evedata.cursor();
+	cursor = evecalc.cursor();
 
 	##Step 1: Get the Lp Item Uids from the database
 	LpItemUid = DbOps.LpItemUid(cursor)
@@ -25,11 +25,11 @@ def UpdateJitaMaxSell():
 	UidAndPrice = WwwOps.item_price(LpItemUid, 'buy', 'max')
 	#print UidAndPrice
 	##Step 3: Update the new price for the Lp store items in the database
-	Result = DbOps.UpdateLpJitaPrice(cursor, evedata, UidAndPrice)
+	Result = DbOps.UpdateLpJitaPrice(cursor, evecalc, UidAndPrice)
 	print(Result)
 
 	#Close the mySQL connection
 	cursor.close()
-	evedata.close()
+	evecalc.close()
 	return Result
 	

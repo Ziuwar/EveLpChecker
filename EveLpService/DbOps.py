@@ -28,7 +28,7 @@ def EveMinerals(cursor):
 def MineralUid(cursor, EveMinerals):
 	"Get the mineral Uid per mineral in the database"
 	
-	SqlComSelItemUid = ("SELECT ItemUid FROM evedata.EveMineralPrice WHERE Mineral = '%s'") # EveMinerals
+	SqlComSelItemUid = ("SELECT ItemUid FROM evecalc.EveMineralPrice WHERE Mineral = '%s'") # EveMinerals
 	ItemUid = []
 	
 	#Iterate over the Minerals stored in the EveMinerals variable
@@ -39,15 +39,15 @@ def MineralUid(cursor, EveMinerals):
 
 	return ItemUid
 
-def UpdateMinerals(cursor, evedata, UidAndPriceM):
+def UpdateMinerals(cursor, evecalc, UidAndPriceM):
 	"Updates the mineral prices for all minerals."
 	
-	SqlComUpdMinPrice = ("UPDATE evedata.EveMineralPrice SET ItemPrice = '%.2f' WHERE ItemUid = '%s'") #ItemPrice, EveMinerals
+	SqlComUpdMinPrice = ("UPDATE evecalc.EveMineralPrice SET ItemPrice = '%.2f' WHERE ItemUid = '%s'") #ItemPrice, EveMinerals
 
 	for Item in UidAndPriceM:	
 		cursor.execute(SqlComUpdMinPrice % (UidAndPriceM[Item], str(Item)))
-	
-	evedata.commit()
+
+	evecalc.commit()
 	
 	MineralsUpdated = '### - ' + str(len(UidAndPriceM)) + ' minerals updated! - ###\n'
 	return MineralsUpdated
@@ -55,7 +55,7 @@ def UpdateMinerals(cursor, evedata, UidAndPriceM):
 def LpItemUid(cursor):
 	"Get the item Uid per item in the database"
 	
-	SqlComSelItemUid = ("SELECT ItemUid FROM evedata.EveItemData")
+	SqlComSelItemUid = ("SELECT ItemUid FROM evecalc.EveItemData")
 	ItemUid = []
 		
 	cursor.execute(SqlComSelItemUid)
@@ -67,17 +67,17 @@ def LpItemUid(cursor):
 
 	return ItemUid	
 
-def UpdateLpJitaPrice(cursor, evedata, UidAndPriceJ):
+def UpdateLpJitaPrice(cursor, evecalc, UidAndPriceJ):
 	"Update the Jita max sell price for all items."
 	
-	SqlComUpdMaxBuy = ("UPDATE evedata.EveItemData SET SellPriceJita = '%.2f' WHERE ItemUid = '%s'") #ItemPrice, EveMinerals
+	SqlComUpdMaxBuy = ("UPDATE evecalc.EveItemData SET SellPriceJita = '%.2f' WHERE ItemUid = '%s'") #ItemPrice, EveMinerals
 	Count = 0
 	
 	for Item in UidAndPriceJ:
 		cursor.execute(SqlComUpdMaxBuy % (UidAndPriceJ[Item], str(Item)))
 		Count = Count + 1
 
-	evedata.commit()
+		evecalc.commit()
 	
 	LpUpdated = '### - ' + str(Count) + ' Jita item prices updated! - ###\n'
 	return LpUpdated	
@@ -116,15 +116,15 @@ def MineralsAndPrice(cursor):
  
 	return MineralAndPrice
 
-def UpdateItemData(cursor, evedata, ItemUid, Calculated):
+def UpdateItemData(cursor, evecalc, ItemUid, Calculated):
 	"Update the Jita max sell price for all items."
 	
-	SqlComUpdMaxBuy = ("UPDATE evedata.EveItemData SET %s = '%.2f' WHERE ItemUid = '%s'") #ColName, Value, UidValue
+	SqlComUpdMaxBuy = ("UPDATE evecalc.EveItemData SET %s = '%.2f' WHERE ItemUid = '%s'") #ColName, Value, UidValue
 
 	for Item in Calculated:
 		cursor.execute(SqlComUpdMaxBuy % (Item,Calculated[Item], str(ItemUid)))
-	
-	evedata.commit()
+
+		evecalc.commit()
 	
 	ItemsUpdated = 'Item data updated'
 	return ItemsUpdated	

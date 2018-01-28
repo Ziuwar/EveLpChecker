@@ -1,4 +1,4 @@
-# Math functions in Python for the evedata project
+# Math functions in Python for the evecalc project
 
 def MineralPriceCalc(MineralPrice, MineralNeed):
     "Calculation of the total mineral price of a given item from the database"
@@ -19,7 +19,7 @@ def ItemProfit (SellPriceJita, PriceTotal):
     # Profit in ISK
     ProfitCombined['ISK'] = SellPriceJita - PriceTotal
     # Profit in %
-    ProfitCombined['Percent'] = SellPriceJita / PriceTotal * 100
+    ProfitCombined['Percent'] = ProfitCombined['ISK'] / PriceTotal * 100
     return ProfitCombined
 
 def LpEfficiency(ProfitIsk, LoyaltyPoints):

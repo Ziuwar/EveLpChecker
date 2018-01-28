@@ -5,16 +5,16 @@ sql_command = 'SELECT ItemName,IskPrice,LpPoints,MaterialPrice,ItemTotalPrice,Se
               'Efficiency FROM evedata.EveItemData ORDER BY Efficiency DESC;'
 
 # Open mySQL connection
-evedata = mysql.connector.connect(user='remote', password='remote', host='192.168.178.25', database='evedata')
+evecalc = mysql.connector.connect(user='root', password='root00Long', host='h2759962.stratoserver.net', database='evecalc')
 # Create a database cursor
-cursor = evedata.cursor()
+cursor = evecalc.cursor()
 
 cursor.execute(sql_command)
 grid_data_fetch = cursor.fetchall()
 
 # Close the mySQL connection
 cursor.close()
-evedata.close()
+evecalc.close()
 
 
 for row in grid_data_fetch:
