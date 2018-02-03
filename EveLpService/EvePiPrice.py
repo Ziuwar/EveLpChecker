@@ -21,7 +21,7 @@ def update_pi_meta_data():
     evecalc = mysql.connector.connect(user='remote', password='remote00Long', host='127.0.0.1', database='evecalc')
     # Create a database cursor
     cursor = evecalc.cursor()
-    # # Step 1 get the pi item UID´s
+    # # Step 1 get the pi item UIDs
     pi_uid = DbOps.pi_uid(cursor)
     # print MineralUid
     # # Step 2 get the current price for the ItemUid from Fuzzwork
