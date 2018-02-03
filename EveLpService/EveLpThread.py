@@ -57,7 +57,7 @@ def print_time(threadName, counter, delay):
 Calc1 = CalcThread(1, 'Eve LP server', 297)
 
 # Start new Thread
-# Calc1.daemon = True
+# # Calc1.daemon = True
 Calc1.start()
 
 print("#-Main thread created-#\n")
